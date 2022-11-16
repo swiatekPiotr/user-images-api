@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 from .views import PhotosApiList
 
 
 urlpatterns = [
-    path('', PhotosApiList.as_view(), name='expense-api-list'),
+    path('pictures/', include('django.contrib.auth.urls')),
+    path('pictures/', PhotosApiList.as_view(), name='expense-api-list'),
 ]
