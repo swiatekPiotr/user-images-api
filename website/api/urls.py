@@ -1,8 +1,9 @@
 from django.urls import path, include
-from .views import PhotosApiList
+from .views import PhotoListCreateAPIView, PhotoRetrieveUpdateAPIView
 
 
 urlpatterns = [
     path('pictures/', include('django.contrib.auth.urls')),
-    path('pictures/', PhotosApiList.as_view(), name='expense-api-list'),
+    path('pictures/', PhotoListCreateAPIView.as_view(), name='photo-api-list'),
+    path('pictures/<int:pk>', PhotoRetrieveUpdateAPIView.as_view(), name='photo-api-retrieve'),
 ]

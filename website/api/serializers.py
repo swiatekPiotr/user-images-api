@@ -26,4 +26,4 @@ class PictureSerializer(serializers.ModelSerializer):
         return img_data
 
     def create(self, validated_data):
-        return Picture.bojects.create(**validated_data)
+        return Picture.objects.create(**validated_data)
