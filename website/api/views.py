@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Picture
@@ -8,6 +8,7 @@ from .serializers import PictureSerializer
 class PhotoListCreateAPIView(generics.ListCreateAPIView):
     queryset = Picture.objects.all().order_by('-date')
     serializer_class = PictureSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = PictureSerializer(data=request.data)
@@ -22,3 +23,4 @@ class PhotoRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = Picture.objects.all().order_by('-date')
     serializer_class = PictureSerializer
     lookup_field = 'pk'
+    permission_classes = [permissions.IsAuthenticated]
