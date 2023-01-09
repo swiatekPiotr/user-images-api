@@ -10,6 +10,11 @@ class PhotoListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = PictureSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset()
+        request = self.request
+        return qs.filter(author=request.user)
+
     def post(self, request, *args, **kwargs):
         serializer = PictureSerializer(data=request.data)
         print(serializer)
@@ -24,3 +29,8 @@ class PhotoRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = PictureSerializer
     lookup_field = 'pk'
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset()
+        request = self.request
+        return qs.filter(author=request.user)

@@ -7,6 +7,11 @@ import base64
 
 
 class PictureSerializer(serializers.ModelSerializer):
+    update_url = serializers.HyperlinkedIdentityField(
+        view_name='photo-api-retrieve',
+        lookup_field='pk',
+        read_only=True
+    )
     photo_binary = serializers.SerializerMethodField('get_photo_binary')
     photo = VersatileImageFieldSerializer(
         sizes=[
@@ -18,7 +23,7 @@ class PictureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Picture
-        fields = ['id', 'title', 'date', 'photo', 'photo_binary']
+        fields = ['update_url', 'id', 'title', 'date', 'photo', 'photo_binary']
 
     def get_photo_binary(self, obj):
         with open((os.getcwd()+obj.photo.url), 'rb') as img_file:
