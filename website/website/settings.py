@@ -123,6 +123,13 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Rest framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2
+}
+
+
 LOGIN_REDIRECT_URL = '/api/pictures'
 LOGOUT_REDIRECT_URL = '/api/pictures/login'
 
